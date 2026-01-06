@@ -2,7 +2,7 @@
 
 A web-based Human Equivalent Dose (HED) calculator for translating drug doses between animal studies and humans.
 
-**Live Demo**: [Coming soon - deploy to Vercel]
+**Live Demo**: https://dose-calculator-bice.vercel.app
 
 **Based on**: [How to estimate human equivalent doses from animal studies](https://olafurpall.substack.com/p/how-to-estimate-human-equivalent) by Ólafur Pall Ólafsson
 

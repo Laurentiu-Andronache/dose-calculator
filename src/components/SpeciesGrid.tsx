@@ -3,9 +3,11 @@
 import { SPECIES_LIST } from '@/lib/constants'
 import type { SpeciesId } from '@/lib/types'
 
-const SPECIES_ICONS: Record<SpeciesId, string> = {
+type IconData = string | { path: string; viewBox: string }
+
+const SPECIES_ICONS: Record<SpeciesId, IconData> = {
   mouse:
-    'M12 4C8 4 5 7 5 11c0 2 1 4 3 5v2c0 1 1 2 2 2h4c1 0 2-1 2-2v-2c2-1 3-3 3-5 0-4-3-7-7-7zm-2 14v1h4v-1h-4zm2-12c3 0 5 2 5 5 0 1.5-.7 2.9-2 4l-.5.5V17h-5v-1.5l-.5-.5c-1.3-1.1-2-2.5-2-4 0-3 2-5 5-5z',
+    'M12 1c-1.5 1 1.5 2 0 3c-1.5 1 1.5 2 0 3c-1.5 1 1.5 2 0 3 M7 12c-1.5 0-2 1-2 2v5c0 1.5 1 3 2.5 3h9c1.5 0 2.5-1.5 2.5-3v-5c0-1-.5-2-2-2H7zm-1 2h5v3H6v-3zm7 0h5v3h-5v-3z',
   hamster:
     'M12 3C7 3 3 7 3 12c0 3 1.5 5.5 4 7v1c0 .5.5 1 1 1s1-.5 1-1v-.3c1 .2 2 .3 3 .3s2-.1 3-.3v.3c0 .5.5 1 1 1s1-.5 1-1v-1c2.5-1.5 4-4 4-7 0-5-4-9-9-9zm-3 8c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1zm6 0c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1zm-1 4H10c-.5 0-1-.5-1-1s.5-1 1-1h4c.5 0 1 .5 1 1s-.5 1-1 1z',
   rat: 'M20 8c0-1-1-2-2-2s-2 1-2 2c0 .5.2 1 .5 1.4C15.5 10 14 11 13 12H7c-2 0-4 1.5-4 4 0 1.5.8 2.8 2 3.5V20c0 .5.5 1 1 1s1-.5 1-1v-.5c.5.3 1.1.5 1.7.5H10c0 1.1.9 2 2 2s2-.9 2-2h1.3c.6 0 1.2-.2 1.7-.5v.5c0 .5.5 1 1 1s1-.5 1-1v-.5c1.2-.7 2-2 2-3.5 0-1.5-.8-2.8-2-3.5V13c1-.5 2-1.5 2-3 0-1-1-2-2-2z',
@@ -14,7 +16,7 @@ const SPECIES_ICONS: Record<SpeciesId, string> = {
   guinea_pig:
     'M21 10c-1 0-2 .5-2.5 1.3-1-1.3-2.5-2.3-4.5-2.3h-4c-3 0-5 2-6 4-1.5.5-2.5 2-2.5 3.5 0 2 1.5 3.5 3.5 3.5.5 0 1-.1 1.5-.3.8 1 2 1.8 3.5 1.8h6c2.5 0 4.5-2 4.5-4.5 0-.5 0-1-.2-1.5.7-.5 1.2-1.3 1.2-2 0-1.5-1.5-3.5-2.5-3.5z',
   rabbit:
-    'M18 4c-1 0-2 .5-2.5 1.3C14.5 4.5 13.3 4 12 4S9.5 4.5 8.5 5.3C8 4.5 7 4 6 4 4.3 4 3 5.3 3 7v2c0 1 .4 2 1 2.7V12c0 4 3 7 7 7h2c4 0 7-3 7-7v-.3c.6-.7 1-1.7 1-2.7V7c0-1.7-1.3-3-3-3zM9 11c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1zm6 0c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1z',
+    'M7 1c-1 0-2 1-2 2v6c0 1.5 1 2.5 2 3-2 1-3 3.5-3 6 0 3 2.5 5 5 5h6c2.5 0 5-2 5-5 0-2.5-1-5-3-6 1-.5 2-1.5 2-3V3c0-1-1-2-2-2s-2 1-2 2v5h-4V3c0-1-1-2-2-2zm2 13c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1zm6 0c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1z',
   dog: 'M18 4c-1 0-2 1-2 2v1c-1-1-2.5-1.5-4-1.5S9 6 8 7V6c0-1-1-2-2-2S4 5 4 6v4c0 1 .4 2 1 2.7V18c0 2 2 3 4 3h6c2 0 4-1 4-3v-5.3c.6-.7 1-1.7 1-2.7V6c0-1-1-2-2-2zM9 12c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1zm6 0c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1z',
   monkey:
     'M12 2C8.5 2 5.5 4.5 5 8c-1.5.5-2.5 2-2.5 3.5S4 14.5 5 15v2c0 3 3 5 6 5h2c3 0 6-2 6-5v-2c1-.5 1.5-2 1.5-3.5S19.5 8.5 18 8c-.5-3.5-3.5-6-7-6zm-2 9c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1zm4 0c-.5 0-1-.5-1-1s.5-1 1-1 1 .5 1 1-.5 1-1 1zm-2 5c-1 0-2-.5-2-1h4c0 .5-1 1-2 1z',
@@ -51,7 +53,11 @@ export function SpeciesGrid({ selected, onSelect }: SpeciesGridProps) {
             }`}
         >
           <svg
-            viewBox="0 0 24 24"
+            viewBox={
+              typeof SPECIES_ICONS[species.id] === 'string'
+                ? '0 0 24 24'
+                : SPECIES_ICONS[species.id].viewBox
+            }
             aria-hidden="true"
             className={`h-8 w-8 ${
               selected === species.id
@@ -59,7 +65,13 @@ export function SpeciesGrid({ selected, onSelect }: SpeciesGridProps) {
                 : 'fill-slate-500 dark:fill-slate-400'
             }`}
           >
-            <path d={SPECIES_ICONS[species.id]} />
+            <path
+              d={
+                typeof SPECIES_ICONS[species.id] === 'string'
+                  ? SPECIES_ICONS[species.id]
+                  : SPECIES_ICONS[species.id].path
+              }
+            />
           </svg>
           <span
             className={`mt-1 text-xs font-medium ${
