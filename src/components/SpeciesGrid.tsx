@@ -40,39 +40,32 @@ interface SpeciesGridProps {
 export function SpeciesGrid({ selected, onSelect }: SpeciesGridProps) {
   return (
     <div className="grid grid-cols-3 gap-2 sm:grid-cols-5 md:grid-cols-7">
-      {SPECIES_LIST.map((species) => (
-        <button
-          key={species.id}
-          type="button"
-          onClick={() => onSelect(species.id)}
-          className={`flex flex-col items-center justify-center rounded-xl p-3 transition-all
+      {SPECIES_LIST.map((species) => {
+        const icon = SPECIES_ICONS[species.id]
+        const isString = typeof icon === 'string'
+        return (
+          <button
+            key={species.id}
+            type="button"
+            onClick={() => onSelect(species.id)}
+            className={`flex flex-col items-center justify-center rounded-xl p-3 transition-all
             ${
               selected === species.id
                 ? 'bg-teal-50 ring-2 ring-teal-500 dark:bg-teal-950 dark:ring-teal-400'
                 : 'bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700'
             }`}
-        >
-          <svg
-            viewBox={
-              typeof SPECIES_ICONS[species.id] === 'string'
-                ? '0 0 24 24'
-                : SPECIES_ICONS[species.id].viewBox
-            }
-            aria-hidden="true"
-            className={`h-8 w-8 ${
-              selected === species.id
-                ? 'fill-teal-600 dark:fill-teal-400'
-                : 'fill-slate-500 dark:fill-slate-400'
-            }`}
           >
-            <path
-              d={
-                typeof SPECIES_ICONS[species.id] === 'string'
-                  ? SPECIES_ICONS[species.id]
-                  : SPECIES_ICONS[species.id].path
-              }
-            />
-          </svg>
+            <svg
+              viewBox={isString ? '0 0 24 24' : icon.viewBox}
+              aria-hidden="true"
+              className={`h-8 w-8 ${
+                selected === species.id
+                  ? 'fill-teal-600 dark:fill-teal-400'
+                  : 'fill-slate-500 dark:fill-slate-400'
+              }`}
+            >
+              <path d={isString ? icon : icon.path} />
+            </svg>
           <span
             className={`mt-1 text-xs font-medium ${
               selected === species.id
@@ -82,8 +75,9 @@ export function SpeciesGrid({ selected, onSelect }: SpeciesGridProps) {
           >
             {species.name}
           </span>
-        </button>
-      ))}
+          </button>
+        )
+      })}
     </div>
   )
 }
